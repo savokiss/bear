@@ -1,14 +1,15 @@
-var http = require('http')
+var request = require('request')
 
 module.exports = function(robot) {
   robot.respond(/res$/, function(msg) {
-    http.get({
-      hostname: 'www.radida.com',
-      port: 80,
-      path: '/pacs/res.json',
-      agent: false // create a new agent just for this one request
-    }, function(res) {
-      console.log(res.body);
-    });
+    request('http://www.radida.com/pacs/res.json', function(err, res, body) {
+      msg.send(JSON.parse(body));
+    })
+  })
+
+  robot.respond(/res_cloud$/, function(msg) {
+    request('http://www.radida.com/pacs_cloud/res.json', function(err, res, body) {
+      msg.send(JSON.parse(body));
+    })
   })
 }
