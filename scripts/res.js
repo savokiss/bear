@@ -8,8 +8,7 @@ module.exports = function(robot) {
       path: '/pacs/res.json',
       agent: false // create a new agent just for this one request
     }, function(res) {
-      console.log(res);
-      console.log(msg);
+      console.log(res.body);
     });
   })
 }
